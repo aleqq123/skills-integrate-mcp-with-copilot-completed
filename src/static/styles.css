@@ -9,7 +9,7 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   color: #333;
-  max-width: 1200px;
+  max-width: 1600px; /* widen content area */
   margin: 0 auto;
   padding: 20px;
   background-color: #f5f5f5;
@@ -29,15 +29,16 @@ header h1 {
 }
 
 main {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr; /* mobile: single column */
   gap: 30px;
-  justify-content: center;
+  align-items: start;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
+  /* desktop/tablet: wider activities area + signup sidebar */
   main {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 1fr; /* give activities more room */
   }
 }
 
@@ -47,7 +48,6 @@ section {
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 500px;
 }
 
 section h3 {
@@ -63,6 +63,8 @@ section h3 {
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
 }
 
 .activity-card h4 {
@@ -128,6 +130,30 @@ section h3 {
 .participants-section p {
   color: #777;
   font-style: italic;
+}
+
+/* Activities list displayed as a responsive grid */
+#activities-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+/* Desktop: show exactly 3 columns for easier comparison */
+@media (min-width: 900px) {
+  #activities-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Make the activities container use full width so grid can expand */
+#activities-container {
+  max-width: none;
+}
+
+/* Keep the signup panel at a comfortable width */
+#signup-container {
+  max-width: 420px;
 }
 
 .form-group {
